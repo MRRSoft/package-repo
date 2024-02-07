@@ -14,6 +14,7 @@ jobs:
           node-version: 16
       - run: npm ci
 
+
   publish-gpr:
     needs: build
     runs-on: ubuntu-latest
@@ -27,6 +28,9 @@ jobs:
           node-version: 16
           registry-url: https://npm.pkg.github.com/
       - run: npm ci
+      - run: npm npm adduser --registry=https://npm.pkg.github.com --scope=@umashankar-pardhi-amla
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
